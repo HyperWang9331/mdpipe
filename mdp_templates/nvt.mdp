@@ -1,0 +1,48 @@
+; ============================================================
+; NVT 平衡 —— 溶剂在蛋白/配体周围弛豫, 骨架被位置约束固定
+; ============================================================
+integrator      = md
+dt              = 0.002       ; ps = 2 fs (X-H 键受约束)
+nsteps          = 250000      ; 500 ps
+
+nstxout             = 0
+nstvout             = 0
+nstfout             = 0
+nstenergy           = 500
+nstlog              = 500
+nstxout-compressed  = 1000    ; 每 2 ps 一帧, 仅用于监控
+
+; --- 非键设置 ---
+cutoff-scheme   = Verlet
+nstlist         = 10
+coulombtype     = PME
+rcoulomb        = 1.0
+rvdw            = 1.0
+pme-order       = 4
+fourierspacing  = 0.16
+vdwtype         = cutoff
+vdw-modifier    = Potential-shift
+DispCorr        = EnerPres
+
+; --- 约束 ---
+constraints             = h-bonds
+constraint-algorithm    = lincs
+lincs-order             = 4
+lincs-iter              = 1
+
+; --- 控温 (V-rescale, 正则系综) ---
+tcoupl          = V-rescale
+tc-grps         = Protein_LIG   Water_and_ions
+tau-t           = 0.1           0.1
+ref-t           = 300           300
+
+; --- NVT 不加压浴 ---
+pcoupl          = no
+
+; --- 初速度 ---
+gen-vel         = yes
+gen-temp        = 300
+gen-seed        = 1001        ; 固定种子：每条独立重复换一个（1001/1002/1003），记进 README
+
+; --- 位置约束 (需 -DPOSRES 且 topology 中已 #include posre.itp / posre_lig.itp) ---
+define          = -DPOSRES

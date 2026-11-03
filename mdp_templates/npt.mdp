@@ -1,0 +1,52 @@
+; ============================================================
+; NPT 平衡 —— 密度/压力收敛; 从 NVT 的 .cpt 续跑以保留速度
+; ============================================================
+integrator      = md
+dt              = 0.002
+nsteps          = 500000      ; 1 ns
+
+nstxout             = 0
+nstvout             = 0
+nstfout             = 0
+nstenergy           = 500
+nstlog              = 500
+nstxout-compressed  = 1000
+
+; --- 非键设置 (与 EM/NVT 一致) ---
+cutoff-scheme   = Verlet
+nstlist         = 10
+coulombtype     = PME
+rcoulomb        = 1.0
+rvdw            = 1.0
+pme-order       = 4
+fourierspacing  = 0.16
+vdwtype         = cutoff
+vdw-modifier    = Potential-shift
+DispCorr        = EnerPres
+
+; --- 约束 ---
+constraints             = h-bonds
+constraint-algorithm    = lincs
+lincs-order             = 4
+lincs-iter              = 1
+
+; --- 控温 (与 NVT 完全一致) ---
+tcoupl          = V-rescale
+tc-grps         = Protein_LIG   Water_and_ions
+tau-t           = 0.1           0.1
+ref-t           = 300           300
+
+; --- 控压 (C-rescale: 收敛快且系综正确, 冷启动安全) ---
+pcoupl              = C-rescale
+pcoupltype          = isotropic
+tau-p               = 2.0             ; ps
+ref-p               = 1.013           ; bar
+compressibility     = 4.5e-5          ; bar^-1 (300 K 水)
+
+; --- 续跑 ---
+gen-vel             = no
+continuation        = yes
+
+; --- 保留位置约束; 加压浴与位置约束共存时必须设置 refcoord-scaling ---
+define              = -DPOSRES
+refcoord-scaling    = com

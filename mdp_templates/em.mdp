@@ -1,0 +1,31 @@
+; ============================================================
+; 能量最小化 (steep) —— 蛋白+小分子, AMBER ff14SB + GAFF2 + TIP3P
+; 目标: 消除初始结构的原子重叠; 用后检查 "Maximum force" < emtol
+; ============================================================
+integrator      = steep
+emtol           = 1000.0      ; kJ/mol/nm
+emstep          = 0.01        ; nm, 初始步长
+nsteps          = 50000       ; 上限; 收敛即可提前结束
+
+nstxout         = 0
+nstvout         = 0
+nstfout         = 0
+nstenergy       = 500
+nstlog          = 500
+
+; --- 非键设置 (四个阶段必须完全一致) ---
+cutoff-scheme   = Verlet
+nstlist         = 10
+coulombtype     = PME
+rcoulomb        = 1.0         ; nm, AMBER 惯例 1.0
+rvdw            = 1.0         ; nm, 必须等于 rcoulomb
+pme-order       = 4
+fourierspacing  = 0.16        ; nm
+vdwtype         = cutoff
+vdw-modifier    = Potential-shift   ; AMBER 用 shift, 不用 force-switch
+DispCorr        = EnerPres          ; 缺少此项 TIP3P 密度会偏低约 1%
+
+; --- 最小化阶段不加约束/控温/控压 ---
+constraints     = none
+tcoupl          = no
+pcoupl          = no

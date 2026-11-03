@@ -1,0 +1,23 @@
+{
+  "gmx": "",
+  "wsl_distro": "",
+  "amber_home": "",
+  "mmpbsa_env": "",
+  "gmx_share": "",
+  "wsl_home": "",
+  "ligplot_home": "",
+  "gpu_id": 0,
+  "use_gpu": true,
+  "ntomp": 4,
+  "ntomp_em": 8,
+  "forcefield": "amber14sb",
+  "water": "tip3p",
+  "salt_conc": 0.15,
+  "box_distance": 1.0,
+  "nvt_ps": 500,
+  "npt_ps": 1000,
+  "prod_ns": 200,
+  "gen_seed_base": 1000,
+  "gpu_jobs": 2,
+  "workers": 2
+}

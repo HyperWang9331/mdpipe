@@ -1,0 +1,46 @@
+; ============================================================
+; 生产动力学 —— GROMOS 54A7 体系，去掉位置约束
+; ============================================================
+integrator      = md
+dt              = 0.002
+nsteps          = 500000000   ; 按需修改
+
+nstxout             = 0
+nstvout             = 0
+nstfout             = 0
+nstenergy           = 5000
+nstlog              = 5000
+nstxout-compressed  = 10000   ; 每 20 ps 一帧
+
+; --- 非键设置 (与前面阶段一致) ---
+cutoff-scheme   = Verlet
+nstlist         = 10
+coulombtype     = reaction-field
+epsilon-rf      = 65
+rcoulomb        = 1.4
+rvdw            = 1.4
+vdwtype         = cutoff
+vdw-modifier    = Potential-shift
+DispCorr        = no
+
+; --- 约束 ---
+constraints             = all-bonds
+constraint-algorithm    = lincs
+lincs-order             = 4
+lincs-iter              = 1
+
+; --- 控温 ---
+tcoupl          = V-rescale
+tc-grps         = Protein_LIG   Water_and_ions
+tau-t           = 0.1           0.1
+ref-t           = 300           300
+
+; --- 控压 ---
+pcoupl              = C-rescale
+pcoupltype          = isotropic
+tau-p               = 2.0
+ref-p               = 1.013
+compressibility     = 4.5e-5
+
+gen-vel             = no
+continuation        = yes

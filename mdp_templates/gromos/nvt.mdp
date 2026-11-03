@@ -1,0 +1,48 @@
+; ============================================================
+; NVT 平衡 —— GROMOS 54A7 体系
+; ============================================================
+integrator      = md
+dt              = 0.002       ; ps = 2 fs（约束了所有化学键）
+nsteps          = 250000      ; 500 ps
+
+nstxout             = 0
+nstvout             = 0
+nstfout             = 0
+nstenergy           = 500
+nstlog              = 500
+nstxout-compressed  = 1000
+
+; --- 非键设置 ---
+cutoff-scheme   = Verlet
+nstlist         = 10
+coulombtype     = reaction-field
+epsilon-rf      = 65
+rcoulomb        = 1.4
+rvdw            = 1.4
+vdwtype         = cutoff
+vdw-modifier    = Potential-shift
+DispCorr        = no
+
+; --- 约束 ---
+; GROMOS 的力常数是在所有键都受约束（SHAKE）的条件下拟合的，
+; 这里用 LINCS 约束全部键；只约束氢键会让键长分布偏离参数化条件。
+constraints             = all-bonds
+constraint-algorithm    = lincs
+lincs-order             = 4
+lincs-iter              = 1
+
+; --- 控温 ---
+tcoupl          = V-rescale
+tc-grps         = Protein_LIG   Water_and_ions
+tau-t           = 0.1           0.1
+ref-t           = 300           300
+
+pcoupl          = no
+
+; --- 初速度 ---
+gen-vel         = yes
+gen-temp        = 300
+gen-seed        = 1001
+
+; --- 位置约束 ---
+define          = -DPOSRES

@@ -1,0 +1,15 @@
+# 统一换行：Windows 批处理必须 CRLF，shell 脚本必须 LF
+* text=auto
+*.py text
+*.md text
+*.json text
+*.sh text eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+*.iss text eol=crlf
+
+# 二进制
+*.ico binary
+*.png binary
+*.pdf binary
+*.zip binary

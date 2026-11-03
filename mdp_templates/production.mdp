@@ -1,0 +1,53 @@
+; ============================================================
+; 生产动力学 —— 去掉位置约束, 采集统计量
+; 轨迹间隔按磁盘预算设置: 58k 原子体系 20 ps 一帧 ≈ 0.1 MB/帧
+;   1 µs → 50000 帧 ≈ 5 GB; 若磁盘紧张, 改 50 ps (nst=25000) ≈ 2 GB
+; ============================================================
+integrator      = md
+dt              = 0.002
+nsteps          = 500000000   ; 1 µs = 500,000,000 步; 按需修改
+
+nstxout             = 0
+nstvout             = 0
+nstfout             = 0
+nstenergy           = 5000    ; 每 10 ps 一个能量点
+nstlog              = 5000
+nstxout-compressed  = 10000   ; 每 20 ps 一帧 xtc
+; 若需要速度相关量 (扩散、VACF): nstvout = 10000 且 format = trr
+
+; --- 非键设置 (与前面阶段一致) ---
+cutoff-scheme   = Verlet
+nstlist         = 10
+coulombtype     = PME
+rcoulomb        = 1.0
+rvdw            = 1.0
+pme-order       = 4
+fourierspacing  = 0.16
+vdwtype         = cutoff
+vdw-modifier    = Potential-shift
+DispCorr        = EnerPres
+
+; --- 约束 ---
+constraints             = h-bonds
+constraint-algorithm    = lincs
+lincs-order             = 4
+lincs-iter              = 1
+
+; --- 控温 ---
+; V-rescale 适用于结构/热力学平均;
+; 若要计算热容、速度分布等, 改用 Nose-Hoover (tau-t = 1.0)
+tcoupl          = V-rescale
+tc-grps         = Protein_LIG   Water_and_ions
+tau-t           = 0.1           0.1
+ref-t           = 300           300
+
+; --- 控压 ---
+; 默认沿用 C-rescale; 若已充分平衡且需要严格 NPT 涨落, 可换 Parrinello-Rahman (tau-p >= 2)
+pcoupl              = C-rescale
+pcoupltype          = isotropic
+tau-p               = 2.0
+ref-p               = 1.013
+compressibility     = 4.5e-5
+
+gen-vel             = no
+continuation        = yes

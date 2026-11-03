@@ -1,0 +1,31 @@
+; ============================================================
+; 能量最小化 (steep) —— GROMOS 54A7 体系
+; 和 amber 那套的唯一区别就是非键设置：GROMOS 的参数是在
+; 反应场 + 1.4 nm 截断下拟合的，不能套 PME + 1.0 nm。
+; ============================================================
+integrator      = steep
+emtol           = 1000.0      ; kJ/mol/nm
+emstep          = 0.01        ; nm
+nsteps          = 50000
+
+nstxout         = 0
+nstvout         = 0
+nstfout         = 0
+nstenergy       = 500
+nstlog          = 500
+
+; --- 非键设置 (四个阶段必须完全一致) ---
+cutoff-scheme   = Verlet
+nstlist         = 10
+coulombtype     = reaction-field
+epsilon-rf      = 65          ; SPC 的反应场介电常数（Heinz 2001）；换 SPCE 用 71
+rcoulomb        = 1.4         ; nm, GROMOS 的双截断外圈
+rvdw            = 1.4
+vdwtype         = cutoff
+vdw-modifier    = Potential-shift
+DispCorr        = no          ; GROMOS 不用长程色散校正
+
+; --- 最小化阶段不加约束/控温/控压 ---
+constraints     = none
+tcoupl          = no
+pcoupl          = no

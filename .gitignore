@@ -1,0 +1,38 @@
+# 运行数据：轨迹、拓扑、日志、分析结果
+pipeline/jobs/
+pipeline/inbox/
+pipeline/splits/
+pipeline/queue.json
+pipeline/figures/*
+!pipeline/figures/appicon.ico
+!pipeline/figures/appicon.png
+!pipeline/figures/appicon_preview.png
+!pipeline/figures/installer_flow.png
+!pipeline/figures/installer_flow.pdf
+
+# 构建产物
+dist/
+build/
+*.exe
+*.zip
+*.log
+doctor_report.txt
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# 本机配置与凭据（config.json 里的默认路径为空，可安全提交）
+.env
+secrets.json
+*.pem
+*.key
+
+# 编辑器与系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
