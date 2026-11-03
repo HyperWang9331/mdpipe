@@ -77,6 +77,6 @@ ATB 导出的拓扑、CHARMM-GUI 生成的输入包、PDB 结构文件都不在�
 
 如果本工具对你的工作有帮助，请引用仓库（`CITATION.cff`）以及实际使用的 GROMACS、AmberTools、gmx_MMPBSA、ATB 等组件。
 
-## 致谢
+## AI使用说明
 
-本项目由作者主导设计，开发过程中使用了 AI 编程助手（Harness）辅助代码实现与文档撰写。
+本项目开发过程中使用了 ClawsGO 辅助代码实现与文档撰写。
