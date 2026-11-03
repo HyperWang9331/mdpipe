@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""画 ClawsGO MD 流水线的应用图标（纯 matplotlib，不依赖设计软件）。
+"""画 MDpipe 的应用图标（纯 matplotlib，不依赖设计软件）。
 
     python scripts/make_icon.py
     → pipeline/figures/appicon.png  (1024 px)

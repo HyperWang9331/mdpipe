@@ -441,7 +441,7 @@ def _render(json_out: bool = False) -> str:
              "warn": sum(r["status"] == WARN for r in results),
              "miss": sum(r["status"] == MISS for r in results)},
             ensure_ascii=False, indent=2)
-    lines = ["ClawsGO MD 流水线环境检测", "=" * 56]
+    lines = ["MDpipe 环境检测", "=" * 56]
     group = None
     for r in results:
         if r["group"] != group:

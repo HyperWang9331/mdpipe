@@ -62,7 +62,7 @@ def registry(home: Path | None = None, cwd: Path | None = None) -> dict[str, Tar
         ("claude", "Claude Code", "skill",
          home / ".claude" / "skills", home / ".claude", ""),
         # —— 项目级 skill 目录
-        ("project", "本项目（ClawsGO）", "skill",
+        ("project", "本项目（.clawsgo）", "skill",
          cwd / ".clawsgo" / "skills", cwd / ".clawsgo", "只影响当前项目"),
         ("pclaude", "本项目（Claude）", "skill",
          cwd / ".claude" / "skills", cwd / ".claude", "只影响当前项目"),
@@ -86,7 +86,7 @@ def rule_body(source: Path = SOURCE) -> str:
     return f"""{AGENTS_BEGIN}
 ## 分子动力学（mdpipe）
 
-本机装有 ClawsGO MD 流水线。要跑 MD、看轨迹、算 MM-PBSA 时，先读
+本机装有 MDpipe（蛋白–配体分子动力学流水线）。要跑 MD、看轨迹、算 MM-PBSA 时，先读
 `{source}` 的完整说明，再动手。
 
 顺序：`mdpipe doctor` → `mdpipe status` → `mdpipe run --job …` →

@@ -65,8 +65,8 @@ PATH_FIELDS = [
 ]
 
 
-ABOUT_TEXT = """ClawsGO MD 流水线  v{version}
-ClawsGO Science Harness
+ABOUT_TEXT = """MDpipe  v{version}
+蛋白–配体分子动力学流水线（Windows + WSL）
 
 把蛋白–小分子分子动力学模拟的结构准备、生产运行、分析和出图
 串成一条可复现的流水线。
@@ -213,7 +213,7 @@ class App:
         self.running = False
         self.ligand_list: list[str] = []
 
-        root.title("分子动力学批处理 · ClawsGO Science")
+        root.title("分子动力学批处理 · MDpipe")
         root.geometry("980x680")
         root.minsize(860, 600)
 

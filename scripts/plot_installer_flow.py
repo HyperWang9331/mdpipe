@@ -86,7 +86,7 @@ def main():
     ax.axis("off")
     fig.subplots_adjust(left=0.01, right=0.99, top=0.99, bottom=0.01)
 
-    ax.text(60, 165, "ClawsGO MD 流水线 · 安装包行为",
+    ax.text(60, 165, "MDpipe · 安装包行为",
             ha="center", va="center", fontsize=17, fontweight="bold", color=INK)
     ax.text(60, 161, "MDpipe-Setup-1.7.exe（Inno Setup 6）",
             ha="center", va="center", fontsize=10.5, color=MUTED)
@@ -94,7 +94,7 @@ def main():
     # 主流程
     box(ax, 30, 152, 46, 7.5, "双击 MDpipe-Setup-1.7.exe", BLUE, BLUE_E,
         fs=11.5, bold=True)
-    box(ax, 30, 140, 46, 8, "选择安装位置\n默认 %LOCALAPPDATA%\\ClawsGO\\MDpipeline")
+    box(ax, 30, 140, 46, 8, "选择安装位置\n默认 %LOCALAPPDATA%\\MDpipe")
     diamond(ax, 30, 126, 42, 12, "检测到 Python 3.9+ ?")
     box(ax, 30, 109, 46, 9,
         "复制文件到安装目录\nscripts / mdp_templates / pipeline 模板\n"

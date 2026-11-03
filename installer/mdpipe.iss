@@ -1,4 +1,4 @@
-﻿; ClawsGO MD 流水线安装脚本（Inno Setup 6）
+﻿; MDpipe 安装脚本（Inno Setup 6）
 ; 用 build.ps1 编译：powershell -ExecutionPolicy Bypass -File installer\build.ps1
 ;
 ; 安装策略：
@@ -9,10 +9,10 @@
 ;     这里不代发二进制。
 ;   * 卸载默认保留 pipeline\jobs 里的计算结果。
 
-#define MyAppName "ClawsGO MD 流水线"
+#define MyAppName "MDpipe"
 #define MyAppVersion "1.7"
-#define MyAppPublisher "ClawsGO"
-#define MyAppURL "https://www.clawsgo.cn"
+#define MyAppPublisher "MDpipe"
+#define MyAppURL "https://github.com/HyperWang9331/mdpipe"
 #define MyAppExeName "启动图形界面.bat"
 
 [Setup]
@@ -21,7 +21,7 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
-DefaultDirName={localappdata}\ClawsGO\MDpipeline
+DefaultDirName={localappdata}\MDpipe
 DefaultGroupName={#MyAppName}
 SetupIconFile=appicon.ico
 UninstallDisplayIcon={app}\appicon.ico

@@ -1,4 +1,4 @@
-﻿# 打包 ClawsGO MD 流水线：便携 zip + Inno Setup 安装程序
+﻿# 打包 MDpipe：便携 zip + Inno Setup 安装程序
 #
 #   powershell -ExecutionPolicy Bypass -File installer\build.ps1
 #   powershell -ExecutionPolicy Bypass -File installer\build.ps1 -ZipOnly

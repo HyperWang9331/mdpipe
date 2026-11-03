@@ -3,7 +3,7 @@ name: md-pipeline
 description: 用 mdpipe 命令行端到端操作 GROMACS 蛋白–配体分子动力学流水线：环境体检、投递与排队、监控、RMSD/RMSF/Rg/SASA/氢键/接触/聚类分析、MM-PBSA 结合自由能、PCA/FEL、出图与归档；遇到复杂问题会先用 mdpipe doc 检索随附的操作手册与安装清单再动手。只要用户提到分子动力学、MD、GROMACS、mdpipe、跑轨迹、投递作业、FABP5、阿魏酸–Keap1、pipeline/jobs、结合自由能或 MM-PBSA，就用这个 skill——即使他们只说“跑个模拟”“看看这批结果”。
 ---
 
-# ClawsGO MD 流水线（mdpipe）
+# MDpipe：蛋白–配体分子动力学流水线
 
 这套软件把「蛋白 + 小分子 → 可分析轨迹」的整条链路封装成一条命令：结构检查与补全、
 配体参数化（AmberTools）、能量最小化、NVT、NPT、生产 MD、分析、出图、MM-PBSA、归档。
@@ -15,7 +15,7 @@ description: 用 mdpipe 命令行端到端操作 GROMACS 蛋白–配体分子�
 
 | 形态 | 调用方式 |
 |---|---|
-| 安装版 | `mdpipe …`（或 `%LOCALAPPDATA%\ClawsGO\MDpipeline\mdpipe.bat …`） |
+| 安装版 | `mdpipe …`（或 `%LOCALAPPDATA%\MDpipe\mdpipe.bat …`） |
 | 源码版 | `python scripts/mdpipe.py …` |
 
 在仓库里工作时优先用源码版，避免改了代码却跑到安装副本上。
@@ -200,7 +200,7 @@ mdpipe doc manual --grep "GROMOS" --context 2  # 按关键词检索，带行号
 mdpipe doc checklist --grep "AmberTools"
 ```
 
-安装版的文档在 `%LOCALAPPDATA%\ClawsGO\MDpipeline\docs\`；源码版在仓库根目录、
+安装版的文档在 `%LOCALAPPDATA%\MDpipe\docs\`；源码版在仓库根目录、
 `installer\` 和 `pipeline\`。`mdpipe doc` 找不到时，按这两个位置直接读文件。
 
 问题与章节的对应关系：
