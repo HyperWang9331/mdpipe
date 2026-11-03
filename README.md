@@ -4,6 +4,31 @@
 
 > 仓库只包含代码、文档、测试和 mdp 模板，不包含任何轨迹、结构数据、ATB/CHARMM-GUI 下载内容或本机配置。
 
+## 下载
+
+Windows 用户不需要装 Python 就能先用起来，三种方式任选：
+
+| 方式 | 适合 | 下载 |
+|---|---|---|
+| **安装包**（推荐） | 不想碰命令行 | [MDpipe-Setup-1.7.exe](https://github.com/HyperWang9331/mdpipe/releases/latest/download/MDpipe-Setup-1.7.exe)（3.0 MB） |
+| **便携版** | 免安装、放 U 盘带走 | [MDpipe-portable.zip](https://github.com/HyperWang9331/mdpipe/releases/latest/download/MDpipe-portable.zip)（1.1 MB） |
+| **源码** | 要读/改代码、自己打包 | `git clone`，见下方「快速开始」 |
+
+全部历史版本在 [Releases](https://github.com/HyperWang9331/mdpipe/releases)。
+
+**安装包做了什么**：装到 `%LOCALAPPDATA%\MDpipe`（**不需要管理员权限**），建开始菜单项和卸载项，可选加入 PATH、可选给 AI 助手装 `md-pipeline` 技能，装完自动跑一次环境自检。流程图见 [`pipeline/figures/installer_flow.png`](pipeline/figures/installer_flow.png)。
+
+**安装包不做什么**：不装 Python、GROMACS、显卡驱动、WSL、conda，不下载任何运行时。装完先双击「环境自检」，缺什么它会逐项列出来。
+
+> **Windows 提示“未知发布者”**：安装包没有代码签名（个人项目未购买证书），SmartScreen 会拦一下——点「更多信息」→「仍要运行」即可。
+
+校验下载（PowerShell）：
+
+```powershell
+certutil -hashfile MDpipe-Setup-1.7.exe SHA256
+# 应输出 5cb8d4c42c222c2c158124962934b9169d0f999578fd0f5989838088f8d49b0e
+```
+
 ## 主要功能
 
 - **准备**：受体体检与补链、配体位姿提取、GAFF2/AM1-BCC 参数化、拓扑组装、溶剂化与加离子
@@ -38,9 +63,9 @@ python scripts\mdpipe.py status
 
 完整说明见 [分子动力学操作手册.md](分子动力学操作手册.md)；组件安装见 [安装与环境清单.md](安装与环境清单.md)；流水线细节见 [pipeline/README.md](pipeline/README.md)。
 
-## 安装包
+## 自己打包（开发者）
 
-`installer\` 下是 Inno Setup 源码，可生成按用户安装的安装程序（开始菜单、卸载、可选加入 PATH）：
+`installer\` 下是 Inno Setup 源码，可生成按用户安装的安装程序（开始菜单、卸载、可选加入 PATH）。需要 [Inno Setup 6](https://jrsoftware.org/isdl.php)：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File installer\build.ps1
